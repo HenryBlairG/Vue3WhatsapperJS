@@ -46,6 +46,7 @@ jobs:
           cd dist
           git config --global user.name "${{ github.actor }}"
           git init
+          git branch -m master main
           git add --all
           git commit -m"Deploy on $(date +%c)"
           git push -f https://${{ github.actor }}:${{ github.token }}@github.com/${{ github.repository }}.git main:page
