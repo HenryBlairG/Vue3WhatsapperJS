@@ -47,7 +47,7 @@ jobs:
           npm run test:e2e
   deploy:
     runs-on: ubuntu-latest
-    if: success() && github.event_name == "push"
+    if: success() && github.event_name == ${{ 'push' }}
     needs: [build, test]
     steps:
       - uses: actions/checkout@v2
