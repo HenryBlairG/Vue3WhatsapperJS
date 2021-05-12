@@ -40,6 +40,15 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v2
+      - name: Cache
+        uses: actions/cache@v2.1.5
+        with:
+          path: |
+            ~/cache
+            !~/cache/exclude
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - name: Run tests
         run: |
           npm run lint
@@ -51,6 +60,15 @@ jobs:
     needs: [build, test]
     steps:
       - uses: actions/checkout@v2
+      - name: Cache
+        uses: actions/cache@v2.1.5
+        with:
+          path: |
+            ~/cache
+            !~/cache/exclude
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - name: Go to compiled path
         run: cd dist
       - name: Push and deploy
