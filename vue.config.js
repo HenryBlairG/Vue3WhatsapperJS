@@ -1,1 +1,3 @@
-export const publicPath = '/Vue3WhatsapperJS/';
+module.exports = {
+  publicPath: "/Vue3WhatsapperJS/",
+};
