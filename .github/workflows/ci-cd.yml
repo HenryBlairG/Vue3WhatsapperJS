@@ -29,7 +29,10 @@ jobs:
             ${{ runner.os }}-node-
       
       - name: Install Dependencies
-        run: npm install
+        run: |
+          npm install -g @vue/cli
+          vue upgrade --next
+          npm install 
 
       - name: Build App
         run: npm run build
