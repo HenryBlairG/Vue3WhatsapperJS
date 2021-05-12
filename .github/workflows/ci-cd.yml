@@ -1,0 +1,53 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CICD
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Cache
+        uses: actions/cache@v2.1.5
+        with:
+          path: |
+            ~/cache
+            !~/cache/exclude
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      
+      - name: Install Dependencies
+        run: npm install 
+      
+      - name: Run tests
+        if: success()
+        run: |
+          npm run lint
+          npm run test:unit
+        # npm run test:e2e
+
+      - name: Push and deploy
+        if: success() && github.event_name == ${{ 'push' }}
+        run: |
+          npm run build
+          cd dist
+          git config --global user.name "${{ github.actor }}"
+          git init
+          git branch -m master main
+          git add --all
+          git commit -m"Deploy on $(date +%c)"
+          git push -f https://${{ github.actor }}:${{ github.token }}@github.com/${{ github.repository }}.git main:page
+        shell: bash
