@@ -21,7 +21,9 @@ jobs:
       - name: Cache
         uses: actions/cache@v2.1.5
         with:
-          path: ${{ steps.npm-cache.outputs.dir }}
+          path: |
+            ~/cache
+            !~/cache/exclude
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
@@ -45,7 +47,7 @@ jobs:
           npm run test:e2e
   deploy:
     runs-on: ubuntu-latest
-    if: success()
+    if: success() && github.event_name == push
     needs: [build, test]
     steps:
       - uses: actions/checkout@v2
