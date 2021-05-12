@@ -1,0 +1,25 @@
+{
+  "name": "vue3whatsapperjs",
+  "version": "0.1.0",
+  "description": "spa to send whatsapp messages through public api",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HenryBlairG/Vue3WhatsapperJS.git"
+  },
+  "author": "HenryBlairG",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HenryBlairG/Vue3WhatsapperJS/issues"
+  },
+  "homepage": "https://github.com/HenryBlairG/Vue3WhatsapperJS#readme",
+  "dependencies": {
+    "vue": "^3.0.11"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-typescript": "^4.5.13"
+  }
+}
