@@ -50,4 +50,4 @@ jobs:
           git init
           git add --all
           git commit -m"Deploy on $(date +%c)"
-          git push -f https://${{ github.actor }}:${{ github.token }}@github.com/${{ github.repository }}.git master:page
+          git push -f https://${{ github.actor }}:${{ github.token }}@github.com/${{ github.repository }}.git main:page
