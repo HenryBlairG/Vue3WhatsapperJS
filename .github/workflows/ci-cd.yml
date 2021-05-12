@@ -29,52 +29,22 @@ jobs:
             ${{ runner.os }}-node-
       
       - name: Install Dependencies
-        run: |
-          npm install @vue/cli
-          vue upgrade --next
-          npm install 
+        run: npm install 
 
       - name: Build App
         run: npm run build
-  
-  test:
-    runs-on: ubuntu-latest
-    if: success()
-    needs: build
-    steps:
-      - uses: actions/checkout@v2
-      - name: Cache
-        uses: actions/cache@v2.1.5
-        with:
-          path: |
-            ~/cache
-            !~/cache/exclude
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+      
       - name: Run tests
+        if: success()
         run: |
           npm run lint
           npm run test:unit
           npm run test:e2e
-  deploy:
-    runs-on: ubuntu-latest
-    if: success() && github.event_name == ${{ 'push' }}
-    needs: [build, test]
-    steps:
-      - uses: actions/checkout@v2
-      - name: Cache
-        uses: actions/cache@v2.1.5
-        with:
-          path: |
-            ~/cache
-            !~/cache/exclude
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+
       - name: Go to compiled path
         run: cd dist
       - name: Push and deploy
+        if: success() && github.event_name == ${{ 'push' }}
         run: |
           git init
           git add --all
