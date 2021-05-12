@@ -18,6 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      
       - name: Cache
         uses: actions/cache@v2.1.5
         with:
@@ -30,9 +31,6 @@ jobs:
       
       - name: Install Dependencies
         run: npm install 
-
-      - name: Build App
-        run: npm run build
       
       - name: Run tests
         if: success()
@@ -41,11 +39,11 @@ jobs:
           npm run test:unit
         # npm run test:e2e
 
-      - name: Go to compiled path
-        run: cd dist
       - name: Push and deploy
         if: success() && github.event_name == ${{ 'push' }}
         run: |
+          npm run build
+          cd dist
           git config --global user.name "${{ github.actor }}"
           git init
           git add --all
