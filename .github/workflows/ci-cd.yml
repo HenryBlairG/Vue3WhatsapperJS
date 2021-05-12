@@ -46,6 +46,7 @@ jobs:
       - name: Push and deploy
         if: success() && github.event_name == ${{ 'push' }}
         run: |
+          git config --global user.name "${{ github.actor }}"
           git init
           git add --all
           git commit -m"Deploy on $(date +%c)"
