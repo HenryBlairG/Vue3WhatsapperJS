@@ -32,3 +32,19 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## Dockerizing App
+
+### Setup
+```
+docker build . -t h/vue-wsp
+```
+### Run
+```
+docker run --name vue_wsp -p 3000:8080 [-d] h/vue-wsp
+```
+
+### Exec
+```
+docker exec vue_wsp
+```
