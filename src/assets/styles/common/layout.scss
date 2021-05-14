@@ -1,0 +1,13 @@
+body,
+html {
+  min-width: 320px;
+  width: 100vw;
+  min-height: 200px;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid: 1fr / 1fr;
+  align-content: center;
+  background-color: var(--gray_clr);
+}

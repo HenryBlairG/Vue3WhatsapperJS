@@ -1,0 +1,29 @@
+@use "sass:color";
+
+$dark-color: #212529;
+$light-color: #ced4da;
+$mid-color: mix($dark-color, $light-color);
+$main-color: #073b4c;
+$alt1-color: #06d6a0;
+$alt2-color: #ef476f;
+$error-color: #ffadad;
+$warn-color: #ffd6a5;
+$succ-color: #caffbf;
+$info-color: #9bf6ff;
+$vue-green: #42b983;
+$vue-blue: #2c3e50;
+
+
+
+:root {
+  --main_clr: #{$main-color};
+  --alt1_clr: #{$alt1-color};
+  --alt2_clr: #{$alt2-color};
+  --dark_clr: #{$dark-color};
+  --lght_clr: #{$light-color};
+  --gray_clr: #{$mid-color};
+  --dang_clr: #{$error-color};
+  --warn_clr: #{$warn-color};
+  --succ_clr: #{$succ-color};
+  --info_clr: #{$info-color};
+}
